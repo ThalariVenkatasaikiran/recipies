@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe List</title>
+    <style>
+        /* Add your CSS styles here */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .nav-buttons {
+            display: flex;
+        }
+        .nav-buttons button {
+            margin-right: 10px;
+        }
+        .recipe-list {
+            margin-top: 20px;
+        }
+        .recipe-item {
+            margin-bottom: 20px;
+        }
+        .recipe-item a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <h2>Welcome, {{ user.username }}</h2>
+            {% endif %}
+        </div>
+        <div class="nav-buttons">
+            <button onclick="location.href='{% url 'create_recipe' %}'">Create Recipe</button>
+            <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+        </div>
+    </div>
+    <div class="content">
+        <h3>Recipes</h3>
+        <ul class="recipe-list">
+            {% for recipe in recipes %}
+                <li class="recipe-item">
+                    <a href="{% url 'recipe_details' recipe.id %}">{{ recipe.name }}</a>
+                </li>
+            {% empty %}
+                <p>No recipes available.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
