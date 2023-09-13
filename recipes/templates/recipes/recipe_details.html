@@ -5,9 +5,26 @@
 </head>
 <body>
     <h2>{{ recipe.name }}</h2>
-    <p>Ingredients: {{ recipe.ingredients }}</p>
-    <p>Process: {{ recipe.process }}</p>
-    <img src="{{ recipe.recipe_images.url }}" alt="{{ recipe.name }}">
+    <p>INGREDIENTS: {{ recipe.ingredients }}</p>
+    <p>PROCESS: {{ recipe.process }}</p>
+    <img src="{{ recipe.recipe_images.url }}" alt="{{ recipe.name }}" style="width:20%; float: left; margin-right: 10px;">
+    <a href="{% url 'recipes' %}">Back to Recipe List</a>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Details</title>
+</head>
+<body>
+    <h2>{{ recipe.name }}</h2>
+    <p>INGREDIENTS: {{ recipe.ingredients }}</p>
+    <p>PROCESS: {{ recipe.process }}</p>
+    <img src="{{ recipe.recipe_images.url }}" alt="{{ recipe.name }}" style="width:20%; float: left; margin-right: 10px;">
     <a href="{% url 'recipes' %}">Back to Recipe List</a>
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
